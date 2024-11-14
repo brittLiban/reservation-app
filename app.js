@@ -4,11 +4,15 @@ const app = express();
 
 
 //mariaDB
+
+// be sure to update the info below with yours
 const mariadb = require('mariadb')
 const pool = mariadb.createPool({
     host: 'localhost',
     user: 'root',
+    //name of your password
     password: 'Black202',
+    // name of your database
     database: 'reservation'
 });
 
@@ -71,6 +75,7 @@ app.post('/confirm', async (req, res) => {
         lastName: req.body.lname, 
     }
 
+    
     const conn = await connect(); 
 
      conn.query(`
