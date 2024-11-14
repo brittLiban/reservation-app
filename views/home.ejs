@@ -1,0 +1,35 @@
+<!-- Want a h1 that will give us a name of the app/title
+ 
+
+    Form that has inputs for first/last name
+    
+    + a submit button
+    
+    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+    <h1>Register Now!</h1>
+    <p>Please add your name to the register for this event</p>
+    <form method="POST" action="/confirm" novalidate>
+        <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname">
+        </div>
+        <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>
