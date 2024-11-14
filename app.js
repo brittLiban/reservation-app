@@ -8,8 +8,8 @@ const mariadb = require('mariadb')
 const pool = mariadb.createPool({
     host: 'localhost',
     user: 'root',
-    password: '1234',
-    database: 'reservations'
+    password: 'Black202',
+    database: 'reservation'
 });
 
 // await makes the function still run while waiting for the host and sercer to run
@@ -75,10 +75,10 @@ app.post('/confirm', async (req, res) => {
 
      conn.query(`
         INSERT INTO users (firstName, lastName)
-        VALUES ('${data.firstName}', '${data.lastName}')
+        VALUES ('${data.firstName}', '${data.lastName}');
     `);
     
-    res.render('confirm' , { details: details });
+    res.render('confirm' , { details: data });
 })
 // when it doubt add a slash 
 app.get('/confirmations', (req, res) => {
