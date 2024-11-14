@@ -2,6 +2,28 @@ const express = require('express');
 const PORT = 3000;
 const app = express();
 
+
+//mariaDB
+const mariadb = require('mariadb')
+const pool = mariadb.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'reservations'
+});
+
+// await makes the function still run while waiting for the host and sercer to run
+// always need to use async to make things happen with await
+async function connect() {
+    try{
+    let conn = await pool.getConnection();
+    console.log('Connected to the database');
+    return conn;
+    }
+    catch (err) {
+        console.log('Error connecting to the database: ' + err)
+    }
+}
 // use this to translate the information into something likeable? 
 app.use(express.urlencoded({ extended: false}));
 
@@ -26,22 +48,36 @@ app.get('/', (req, res) => {
 
 // You can only access this page if you post? What does that mean? 
 // post is to send info to the server
-app.post('/confirm', (req, res) => {
+// add async 
+app.post('/confirm', async (req, res) => {
     //console.log(req);
     console.log(req.body);
     // Down is EJS era
     // res.send(req.body);
     // res.sendFile(__dirname + '/confirm.html');
     // this line grabs everything from the request body
-    let details = req.body;
+    // let details = req.body;
 
     // adding details to the array 
-    confirmations.push(details);
+    // confirmations.push(details);
 
 
-    console.log(confirmations);
+    // console.log(confirmations);
     // this below sends back everything  
     // naming the variable as array AND THEN saying its equal to the array WHICH MEANS that details is equal req.body
+
+    const data = {
+        firstName: req.body.fname,
+        lastName: req.body.lname, 
+    }
+
+    const conn = await connect(); 
+
+     conn.query(`
+        INSERT INTO users (firstName, lastName)
+        VALUES ('${data.firstName}', '${data.lastName}')
+    `);
+    
     res.render('confirm' , { details: details });
 })
 // when it doubt add a slash 
