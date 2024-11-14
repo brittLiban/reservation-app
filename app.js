@@ -81,12 +81,18 @@ app.post('/confirm', async (req, res) => {
     res.render('confirm' , { details: data });
 })
 // when it doubt add a slash 
-app.get('/confirmations', (req, res) => {
+app.get('/confirmations', async (req, res) => {
     // how to send the array back to front end
 
     // need to get it to send to confirmations 
     // not seeing it
-    res.render('confirmations', {data: confirmations});
+
+
+    const conn = await connect();
+
+    const rows = await conn.query(`SELECT * FROM users`);
+
+    res.render('confirmations', {data: rows});
 }
 )
 // want the app weve defined above with the routes to be listening to all the routes

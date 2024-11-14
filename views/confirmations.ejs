@@ -16,7 +16,8 @@
                 <!-- iterating through the current data i -->
                 <!-- We know its fname/lname because this is the id in the tag we snatched earlier from the html, can confirm this by console logging the confirmations and seeing the label assocaited with the data type in the array - the OBJECTS names  -->
                 <li>
-                    <%= data[i].fname %>
+                    <%= data[i].firstName %> <%= data[i].lastName %>
+                   
                 </li>
                 <!-- need to close it but remember js requires a closing brack } -->
             <% } %>
